@@ -181,20 +181,34 @@ main .top-section {
     background-color: hsl(219, 100%, 16%);
 }
 
-.top-section #date-filter {
-    display: flex;
-    background-color: var(--highlight);
-    border: none;
-    color: var(--accent);
-    min-width: 100px;
-    justify-content: left;
-    padding: 5px 10px;
-    border-radius: var(--default-border-radius);
-    box-shadow: var(--default-shadow);
-    transition: all .1s ease 0s;
+.top-section #date-filter-container {
+    overflow: hidden;
+    #date-filter-toggle {
+        display: flex;
+        background-color: var(--highlight);
+        border: none;
+        color: var(--accent);
+        min-width: 100px;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1em;
+        padding: 5px 10px;
+        border-radius: var(--default-border-radius);
+        box-shadow: var(--default-shadow);
+
+        svg {
+            width: 1.2em;
+            fill: var(--accent);
+            transition: rotate 300ms ease;
+        }
+
+    }
 }
-.top-section #date-filter:hover {
+.top-section #date-filter-container #date-filter-toggle:hover {
     background-color: hsl(219, 100%, 16%);
+}
+#date-filter-container.rotate svg:last-child {
+    rotate: 180deg;
 }
 
 .top-section #stat-filter {

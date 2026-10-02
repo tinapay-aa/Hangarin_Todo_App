@@ -5,11 +5,11 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <nav id="sidebar">
+    <nav id="sidebar" class="close">
         <ul>
             <li id="profile-section">
                 <img id="profile-pic" src="{% static 'img/aleksander.png' %}" alt="">
-                <button id="toggle-btn" class="" onclick=toggleSidebar()>
+                <button id="toggle-btn" onclick=toggleSidebar()>
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M383-480 200-664l56-56 240 240-240 240-56-56 183-184Zm264 0L464-664l56-56 240 240-240 240-56-56 183-184Z"/></svg>
                 </button>
             </li>
@@ -55,9 +55,17 @@
                 </button>
             </div>
 
-            <div class="main-content" id="date-filter">
-                Date
+            <div class="main-content" id="date-filter-container">
+                <form id="date-filter-form" method="get">
+                    <input type="hidden" name="date-filter" id="date-filter-state" value="{{ date_filter}}">
+
+                    <button id="date-filter-toggle" name="date-asc" onclick="toggle_date_filter()">
+                        <span>Date</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-80 200-360l56-57 184 184v-287h80v287l184-183 56 56L480-80Zm-40-520v-120h80v120h-80Zm0-200v-80h80v80h-80Z"/></svg>
+                    </button>
+                </form>
             </div>
+            
             <div class="main-content" id="stat-filter">Status</div>
             <div class="main-content" id="cat-filter">Category</div>
             <button class="main-content" id="add-todo">
