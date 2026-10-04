@@ -1,29 +1,20 @@
-const sidebar_toggleButton = document.getElementById('toggle-btn')
-const sidebar = document.getElementById('sidebar')
-const date_filter = document.getElementById('date-filter-state')
-const date_filter_container = document.getElementById('date-filter-container')
+const date_radio_btns = document.querySelectorAll(
+    'input[type="radio"][name="date-sort"]'
+);
 
-document.addEventListener('DOMContentLoaded', function() {
-    if (date_filter.value == 'asc') {
-        date_filter_container.classList.add('rotate')
-    }
-    else {
-        date_filter_container.classList.remove('rotate')
-    }
-});
+const filter_modal = document.getElementById('filter-modal-container')
 
-function toggleSidebar() {
-    if (sidebar.classList.contains('close')) {
-        sidebar.classList.remove('close')
-        sidebar_toggleButton.classList.add('rotate')
-    }
-    else {
-        sidebar.classList.add('close')
-        sidebar_toggleButton.classList.remove('rotate')
-    }
+function toggle_filter_modal() {
+    filter_modal.classList.toggle('close')
 }
 
-function toggle_date_filter() {
-    date_filter.value = date_filter.value == 'asc' ? 'desc' : 'asc'
-    date_filter_container.classList.toggle('rotate')
-}
+date_radio_btns.forEach(radio => {
+    radio.addEventListener('change', function() {
+        date_radio_btns.forEach(r => {
+            r.parentElement.classList.toggle(
+                'active',
+                r.checked
+            )
+        })
+    })
+})

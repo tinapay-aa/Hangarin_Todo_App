@@ -5,81 +5,105 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <nav id="sidebar" class="close">
-        <ul>
-            <li id="profile-section">
-                <img id="profile-pic" src="{% static 'img/aleksander.png' %}" alt="">
-                <button id="toggle-btn" onclick=toggleSidebar()>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M383-480 200-664l56-56 240 240-240 240-56-56 183-184Zm264 0L464-664l56-56 240 240-240 240-56-56 183-184Z"/></svg>
+    <div class="top-section" style="grid-area: top-section;">
+        <form id="search-form" role="search" method="get">
+            <input id="search-input" type="search" name="search-query" placeholder="Search...">
+        </form>
+
+        <button id="filter-btn" onclick=toggle_filter_modal()>
+            Filter
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M400-240v-80h160v80H400ZM240-440v-80h480v80H240ZM120-640v-80h720v80H120Z"/></svg>
+        </button>
+
+        <button id="add-button">
+            Add
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q65 0 123 19t107 53l-58 59q-38-24-81-37.5T480-800q-133 0-226.5 93.5T160-480q0 133 93.5 226.5T480-160q32 0 62-6t58-17l60 61q-41 20-86 31t-94 11Zm280-80v-120H640v-80h120v-120h80v120h120v80H840v120h-80ZM424-296 254-466l56-56 114 114 400-401 56 56-456 457Z"/></svg>
+        </button>
+    </div>
+
+    <div class="filter-modal-container close" id="filter-modal-container">
+        <div class="filter-modal">
+            <span>
+                <h1>Filters</h1>
+                <button onclick=toggle_filter_modal()>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
                 </button>
-            </li>
-            <li id="username-section">
-                <span id="username">Username</span>
-            </li>
-            <li class="sidebar-content active">
-                <a href="">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M520-600v-240h320v240H520ZM120-440v-400h320v400H120Zm400 320v-400h320v400H520Zm-400 0v-240h320v240H120Zm80-400h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z"/></svg>
-                    Dashboard
-                </a>
-            </li>
-            <li class="sidebar-content">
-                <a href="">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm146.5-204.5Q340-521 340-580t40.5-99.5Q421-720 480-720t99.5 40.5Q620-639 620-580t-40.5 99.5Q539-440 480-440t-99.5-40.5ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm100-95.5q47-15.5 86-44.5-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160q53 0 100-15.5ZM523-537q17-17 17-43t-17-43q-17-17-43-17t-43 17q-17 17-17 43t17 43q17 17 43 17t43-17Zm-43-43Zm0 360Z"/></svg>
-                    Profile Settings
-                </a>
-            </li>
-            <li class="sidebar-content">
-                <a href="">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M600-120h240v-33q-25-23-56-35t-64-12q-33 0-64 12t-56 35v33Zm162.5-137.5Q780-275 780-300t-17.5-42.5Q745-360 720-360t-42.5 17.5Q660-325 660-300t17.5 42.5Q695-240 720-240t42.5-17.5ZM480-480Zm2-140q-58 0-99 41t-41 99q0 48 27 84t71 50q0-23 .5-44t8.5-38q-14-8-20.5-22t-6.5-30q0-25 17.5-42.5T482-540q15 0 28.5 7.5T533-512q11-5 23-7t24-2h36q-13-43-49.5-71T482-620ZM370-80l-16-128q-13-5-24.5-12T307-235l-119 50L78-375l103-78q-1-7-1-13.5v-27q0-6.5 1-13.5L78-585l110-190 119 50q11-8 23-15t24-12l16-128h220l16 128q13 5 24.5 12t22.5 15l119-50 110 190-85 65H696q-1-5-2-10.5t-3-10.5l86-65-39-68-99 42q-22-23-48.5-38.5T533-694l-13-106h-79l-14 106q-31 8-57.5 23.5T321-633l-99-41-39 68 86 64q-5 15-7 30t-2 32q0 16 2 31t7 30l-86 65 39 68 99-42q24 25 54 42t65 22v184h-70Zm210 40q-25 0-42.5-17.5T520-100v-280q0-25 17.5-42.5T580-440h280q25 0 42.5 17.5T920-380v280q0 25-17.5 42.5T860-40H580Z"/></svg>
-                    Account Settings
-                </a>
-            </li>
-            <li class="sidebar-content">
-                <a href="">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/></svg>
-                Logout
-                </a>
-            </li>
-        </ul>
-    </nav>
+            </span>
+            <form action="" method="get">
 
-    <main>
-        <div class="top-section">
+                <div id="date-filter-container">
+                    <h3>Sort by Date</h3>
+                    <div id="option-container">
+                        <div class="filter-option active">
+                            <input type="radio" name="date-sort" id="date-sort-radio-asc" value="asc" checked>
+                            <label for="date-sort-radio-asc">Ascending</label>
+                        </div>
 
-            <div class="main-content" id="search-bar">
-                <form id="search-form" role="search" method="get">
-                    <input type="search" name="search-query" id="search-input" placeholder="Search...">
-                </form>
-                <button id="search-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffbf00"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
-                </button>
-            </div>
+                        <div class="filter-option">
+                            <input type="radio" name="date-sort" id="date-sort-radio-desc" value="desc">
+                            <label for="date-sort-radio-desc">Descending</label>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="main-content" id="date-filter-container">
-                <form id="date-filter-form" method="get">
-                    <input type="hidden" name="date-filter" id="date-filter-state" value="{{ date_filter}}">
+                <div id="status-filter-container">
+                    <h3>Status</h3>
+                    <div class="option-container">
+                        <div class="filter-option">
+                            <input class="status-filter-checkbox" type="checkbox" name="status" id="all-status" checked>
+                            <label for="all-status">All</label>
+                        </div>
+                        <div class="filter-option">
+                            <input class="status-filter-checkbox" type="checkbox" name="status" id="in-progress-status">
+                            <label for="in-progress-status">In Progress</label>
+                        </div>
+                        <div class="filter-option">
+                            <input class="status-filter-checkbox" type="checkbox" name="status" id="completed-status">
+                            <label for="completed-status">Completed</label>
+                        </div>
+                        <div class="filter-option">
+                            <input class="status-filter-checkbox" type="checkbox" name="status" id="expired-status">
+                            <label for="expired-status">Expired</label>
+                        </div>
+                    </div>
+                </div>
 
-                    <button id="date-filter-toggle" name="date-asc" onclick="toggle_date_filter()">
-                        <span>Date</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-80 200-360l56-57 184 184v-287h80v287l184-183 56 56L480-80Zm-40-520v-120h80v120h-80Zm0-200v-80h80v80h-80Z"/></svg>
-                    </button>
-                </form>
-            </div>
-            
-            <div class="main-content" id="stat-filter">Status</div>
-            <div class="main-content" id="cat-filter">Category</div>
-            <button class="main-content" id="add-todo">
-                Add
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
-            </button>
+                <div class="category-filter-container">
+                    <h3>Categories</h3>
+                    <div class="option-container">
+                        {% for category in categories %}
+                            <div class="filter-option">
+                                <input class="cat-filter-checkbox" type="checkbox" name="{{ category }}" id="{{ category }}" checked>
+                                <label for="{{ category }}">{{ category }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
 
+                <div class="priority-filter-container">
+                    <h3>Priority</h3>
+                    <div class="option-container">
+                        {% for priority in priorities %}
+                            <div class="filter-option">
+                                <input class="cat-filter-checkbox" type="checkbox" name="{{ priority }}" id="{{ priority }}" checked>
+                                <label for="{{ priority }}">{{ priority }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <button id="apply-btn" type="submit">Apply</button>
+                <button id="reset-btn" type="reset">Reset</button>
+            </form>
         </div>
+    </div>
 
+    <div class="table-wrapper">
         <table style="grid-area: todos-table;">
             <thead>
                 <colgroup>
                     <col style="width: 10%;">
-                    <col style="width: 40%;">
+                    <col style="width: 45ch;">
                     <col style="width: 10%;">
                     <col style="width: 10%;">
                     <col style="width: 10%;">
@@ -108,16 +132,8 @@
                     <td><a href="">Edit</a></td>
                     <td><a href="">Delete</a></td>
                 </tr>
-                    {% for subtask in task.subtasks.all %}
-                    <tr>
-                        <td>{{ subtask.title }}</td>
-                        <td></td>
-                        <td></td>
-                        <td>{{ subtask.status }}</td>
-                    </tr>
-                    {% endfor %}
                 {% endfor %}
             </tbody>
         </table>
-    </main>
+    </div>
 {% endblock %}
