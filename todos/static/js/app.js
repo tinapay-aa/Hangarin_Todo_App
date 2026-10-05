@@ -2,6 +2,8 @@ const date_radio_btns = document.querySelectorAll(
     'input[type="radio"][name="date-sort"]'
 );
 
+const main = document.querySelector('main')
+
 const status_checkboxes = document.querySelectorAll('.status-filter-checkbox')
 const status_toggler = document.getElementById('status-toggler')
 
@@ -12,6 +14,11 @@ const priority_checkboxes = document.querySelectorAll('.priority-filter-checkbox
 const priority_toggler = document.getElementById('priority-toggler')
 
 const filter_modal = document.getElementById('filter-modal-container')
+
+if (window.location.pathname == '/task/create/') {
+    main.classList.add('createTask');
+    console.log("HUAAH")
+}
 
 function toggle_filter_modal() {
     filter_modal.classList.toggle('close')

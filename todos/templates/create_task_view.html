@@ -5,8 +5,16 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<form action="" method=POST>
-    {% csrf_token %}
-    {{ form.as_p }}
-</form>
+<div class="form-container">
+    <form action="" method=POST>
+        <span>
+        <h1>Create Task</h1>
+        <a href="/">Go back</a>
+        </span>
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <input id="submit-button" type="submit">
+    </form>
+</div>
 {% endblock %}
