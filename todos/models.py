@@ -4,7 +4,7 @@ from django.db import models
 class TaskStatus(models.TextChoices):
     PENDING = 'Pending', 'pending'
     IN_PROGRESS = 'In Progress', 'in_progress'
-    COMPLETE = 'Complete', 'complete'
+    COMPLETE = 'Completed', 'completed'
     
 class Category(models.Model):
     name = models.CharField(max_length=50)

@@ -8,9 +8,9 @@ class Command(BaseCommand):
     help = 'Creates random initial data'
     
     def handle(self, *args, **kwards):
-        self.generate_tasks(10)
-        self.generate_subtasks(10)
-        self.generate_notes(5)
+        self.generate_tasks(50)
+        self.generate_subtasks(25)
+        self.generate_notes(15)
     
     def generate_tasks(self, count: int):
         fake = Faker()
@@ -19,7 +19,9 @@ class Command(BaseCommand):
                 title = fake.sentence(nb_words=5),
                 description = fake.paragraph(nb_sentences=3),
                 deadline = timezone.make_aware(fake.date_time_this_month()),
-                status = fake.random_element(elements=["Pending", "In Progress", "Completed"])
+                status = fake.random_element(elements=["Pending", "In Progress", "Completed"]),
+                category = Category.objects.order_by('?').first(),
+                priority = Priority.objects.order_by('?').first()
             )
             
             task.save()
