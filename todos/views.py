@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse   
 from .models import Task, Category, Priority 
+from .forms import TaskForm
 from django.core.paginator import Paginator
+from django.views.generic import CreateView, UpdateView
+from django.urls import reverse_lazy
 # Create your views here.
 
 def Home(request):
@@ -40,3 +43,9 @@ def Home(request):
         'tasks': paginated_tasks, 
         'categories': categories,
         'priorities': priorities})
+
+class TaskCreateView(CreateView):
+    model = Task
+    form_class = TaskForm
+    template_name = 'create_task_view.html'
+    success_url = reverse_lazy('Home_Page')
