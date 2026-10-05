@@ -9,6 +9,7 @@ def Home(request):
     date_sort = request.GET.get("date-sort", "asc")
     status_filter = request.GET.getlist("status")
     category_filter = request.GET.getlist("category")
+    priority_filter = request.GET.getlist("priority")
     
     categories = Category.objects.all()
     priorities = Priority.objects.all()
@@ -19,6 +20,9 @@ def Home(request):
         
     if category_filter:
         tasks = tasks.filter(category__name__in=category_filter)
+        
+    if priority_filter:
+        tasks = tasks.filter(priority__name__in=priority_filter)
     
     if date_sort == "asc":
         tasks = tasks.order_by('deadline')

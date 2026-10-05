@@ -121,7 +121,7 @@
                     <div class="option-container">
                         {% for category in categories %}
                             <div class="filter-option">
-                                <input class="cat-filter-checkbox" type="checkbox" name="category" value="{{ category.name }}" id="{{ category }}" onclick="toggle_checkbox_toggler(cat_toggler, cat_checkboxes)">
+                                <input class="cat-filter-checkbox" type="checkbox" name="category" value="{{ category.name }}" onclick="toggle_checkbox_toggler(cat_toggler, cat_checkboxes)">
                                 <label for="{{ category }}">{{ category }}</label>
                             </div>
                         {% endfor %}
@@ -136,7 +136,7 @@
                     <div class="option-container">
                         {% for priority in priorities %}
                             <div class="filter-option">
-                                <input class="priority-filter-checkbox" type="checkbox" name="{{ priority }}" id="{{ priority }}" onclick="toggle_checkbox_toggler(priority_toggler, priority_checkboxes)">
+                                <input class="priority-filter-checkbox" type="checkbox" name="priority" value="{{ priority.name }}" onclick="toggle_checkbox_toggler(priority_toggler, priority_checkboxes)">
                                 <label for="{{ priority }}">{{ priority }}</label>
                             </div>
                         {% endfor %}
