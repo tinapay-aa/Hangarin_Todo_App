@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse   
 from .models import Task, Category, Priority 
+from django.core.paginator import Paginator
 # Create your views here.
 
 def Home(request):
@@ -12,8 +13,13 @@ def Home(request):
     
     if search_query:
         tasks = tasks.filter(title__contains=search_query)
+        
+    paginator = Paginator(tasks, 10) 
+    page = request.GET.get('page')
+    paginated_tasks = paginator.get_page(page)
+    
     
     return render(request, 'home.html', {
-        'tasks': tasks, 
+        'tasks': paginated_tasks, 
         'categories': categories,
         'priorities': priorities})

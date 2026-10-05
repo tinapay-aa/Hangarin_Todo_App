@@ -2,9 +2,9 @@ from django.db import models
 
 # Create your models here
 class TaskStatus(models.TextChoices):
+    PENDING = 'Pending', 'pending'
     IN_PROGRESS = 'In Progress', 'in_progress'
     COMPLETE = 'Complete', 'complete'
-    EXPIRED = 'Expired', 'expired'
     
 class Category(models.Model):
     name = models.CharField(max_length=50)

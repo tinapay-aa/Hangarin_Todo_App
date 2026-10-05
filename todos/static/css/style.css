@@ -13,7 +13,7 @@
 }
 
 body {
-    background-image: url('../img/leather-nunchuck.png');
+    background-image: url('../img/Gods-Lanterns-large.png');
     background-size: contain;
     background-repeat: repeat;
     background-position: fixed;
@@ -166,6 +166,25 @@ main {
         button:hover {
             min-width: 125px;
             background: rgba(255, 255, 255, .2);
+        }
+
+        #pagination-container {
+            display: flex;
+            justify-content: right;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            padding: 1em;
+
+            border: 1px solid red;
+
+            a {
+                text-decoration: none;
+            }
+            #begin-end-navigator {
+                font-size: 2em;
+            }
+
         }
 
     }
