@@ -16,7 +16,7 @@
         {% csrf_token %}
         <span>
             <button id="delete-button" type="submit">Yes, delete</button>
-            <a id="back-button" href="/">No, go back</a>
+            <a id="back-button" href="/?{{ request.GET.urlencode }}">No, go back</a>
         </span>
     </form>
 </div>

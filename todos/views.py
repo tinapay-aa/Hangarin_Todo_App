@@ -24,6 +24,12 @@ def Home(request):
     subtasks = SubTask.objects.all()
     notes = Note.objects.all()
     
+    if search_query:
+        tasks = tasks.filter(title__contains=search_query)
+        subtasks = subtasks.filter(parent_task__title__contains=search_query)
+        subtasks = subtasks.filter(title__contains=search_query)
+        notes = notes.filter(task__title__contains=search_query)
+    
     if status_filter:
         tasks = tasks.filter(status__in=status_filter)
         subtasks = subtasks.filter(status__in=status_filter)
@@ -39,12 +45,6 @@ def Home(request):
     else:
         tasks = tasks.order_by('-deadline')
         
-    if search_query:
-        tasks = tasks.filter(title__contains=search_query)
-        subtasks = subtasks.filter(parent_task__title__contains=search_query)
-        subtasks = subtasks.filter(title__contains=search_query)
-        notes = notes.filter(task__title__contains=search_query)
-    
     if table_content == 'tasks':
         paginator = Paginator(tasks, 10) 
         page = request.GET.get('page')
@@ -70,6 +70,14 @@ class TaskCreateView(CreateView):
     form_class = TaskForm
     template_name = 'Task/create_task.html'
     success_url = reverse_lazy('Home_Page')
+    
+    def get_success_url(self):
+        query_params = self.request.GET.urlencode()
+        
+        if query_params:
+            return f'/?{query_params}'
+        else:
+            return '/'
 
 class TaskUpdateView(UpdateView):
     model = Task
@@ -77,41 +85,105 @@ class TaskUpdateView(UpdateView):
     template_name = 'Task/update_task.html'
     success_url = reverse_lazy('Home_Page')
     
+    def get_success_url(self):
+        query_params = self.request.GET.urlencode()
+        
+        if query_params:
+            return f'/?{query_params}'
+        else:
+            return '/'
+    
 class TaskDeleteView(DeleteView):
     model = Task
     template_name = 'Task/delete_task.html'
     success_url = reverse_lazy('Home_Page')
+    
+    def get_success_url(self):
+        query_params = self.request.GET.urlencode()
+        
+        if query_params:
+            return f'/?{query_params}'
+        else:
+            return '/'
     
 class SubtaskCreateView(CreateView):
     model = SubTask
     form_class = SubtaskForm
     template_name = 'Subtask/create_subtask.html'
     success_url = reverse_lazy('Home_Page')
+    
+    def get_success_url(self):
+        query_params = self.request.GET.urlencode()
+        
+        if query_params:
+            return f'/?{query_params}'
+        else:
+            return '/'
 
 class SubtaskUpdateView(UpdateView):
     model = SubTask
     form_class = SubtaskForm
     template_name = 'Subtask/update_subtask.html'
     success_url = reverse_lazy('Home_Page')
+    
+    def get_success_url(self):
+        query_params = self.request.GET.urlencode()
+        
+        if query_params:
+            return f'/?{query_params}'
+        else:
+            return '/'
 
 class SubtaskDeleteView(DeleteView):
     model = SubTask
     template_name = 'Subtask/delete_subtask.html'
     success_url = reverse_lazy('Home_Page')
     
+    def get_success_url(self):
+        query_params = self.request.GET.urlencode()
+        
+        if query_params:
+            return f'/?{query_params}'
+        else:
+            return '/'
+    
 class NoteCreateView(CreateView):
     model = Note
     form_class = NotesForm
     template_name = 'Note/create_note.html'
     success_url = reverse_lazy('Home_Page')
+    
+    def get_success_url(self):
+        query_params = self.request.GET.urlencode()
+        
+        if query_params:
+            return f'/?{query_params}'
+        else:
+            return '/'
 
 class NoteUpdateView(UpdateView):
     model = Note
     form_class = NotesForm
     template_name = 'Note/update_note.html'
     success_url = reverse_lazy('Home_Page')
+    
+    def get_success_url(self):
+        query_params = self.request.GET.urlencode()
+        
+        if query_params:
+            return f'/?{query_params}'
+        else:
+            return '/'
 
 class NoteDeleteView(DeleteView):
     model = Note
     template_name = 'Note/delete_note.html'
     success_url = reverse_lazy('Home_Page')
+    
+    def get_success_url(self):
+        query_params = self.request.GET.urlencode()
+        
+        if query_params:
+            return f'/?{query_params}'
+        else:
+            return '/'

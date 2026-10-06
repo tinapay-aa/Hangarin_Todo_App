@@ -8,8 +8,8 @@
 <div class="form-container">
     <form action="" method=POST>
         <span>
-        <h1>Create Task</h1>
-        <a id="back-button" href="/">Go back</a>
+        <h1>Edit Note</h1>
+        <a id="back-button" href="/?{{ request.GET.urlencode }}">Go back</a>
         </span>
         {% csrf_token %}
         {{ form.as_p }}

@@ -9,7 +9,7 @@
     <form action="" method=POST>
         <span>
         <h1>Update Task</h1>
-        <a href="/">Go back</a>
+        <a href="/?{{ request.GET.urlencode }}">Go back</a>
         </span>
         {% csrf_token %}
         {{ form.as_p }}
