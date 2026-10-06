@@ -27,13 +27,14 @@
 
         <div id="dropdown-content">
             <a id="task-link" href="?{{ query_param }}&table-content=tasks">Tasks</a>
-            <a id="subtask-link" href="?{{ query_param }}&table-content=subtasks">Subtasks & Notes</a>
+            <a id="subtask-link" href="?{{ query_param }}&table-content=subtasks">Subtasks</a>
+            <a id="notes-link" href="?{{ query_param }}&table-content=notes">Notes</a>
         </div>
         </div>
 
         <div id="pagination-container">
-            {% if tasks.number != 1 %}
-            <a href="?{{ query_params }}{{ tasks.start_index }}">
+            {% if content.number != 1 %}
+            <a href="?{{ query_params }}&page=1">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M440-240 200-480l240-240 56 56-183 184 183 184-56 56Zm264 0L464-480l240-240 56 56-183 184 183 184-56 56Z"/></svg>
             </a>
             {% else %}
@@ -42,8 +43,8 @@
             </a>
             {% endif %}
 
-            {% if tasks.has_previous %}
-            <a href="?{{ query_params }}&page={{ tasks.previous_page_number }}">
+            {% if content.has_previous %}
+            <a href="?{{ query_params }}&page={{ content.previous_page_number }}">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/></svg>
             </a>
             {% else %}
@@ -53,11 +54,11 @@
             {% endif %}
 
             <span>
-                Page {{ tasks.number }} of {{ tasks.paginator.num_pages }}
+                Page {{ content.number }} of {{ content.paginator.num_pages }}
             </span>
 
-            {% if tasks.has_next %}
-            <a href="?{{ query_params }}&page={{ tasks.next_page_number }}">
+            {% if content.has_next %}
+            <a href="?{{ query_params }}&page={{ content.next_page_number }}">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
             </a>
             {% else %}
@@ -66,8 +67,8 @@
             </a>
             {% endif %}
 
-            {% if tasks.has_next and tasks.number != tasks.count %}
-            <a href="?{{ query_params }}&page={{ tasks.end_index }}">
+            {% if content.has_next and content.number != content.paginator.num_pages %}
+            <a href="?{{ query_params }}&page={{ content.paginator.num_pages }}">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M383-480 200-664l56-56 240 240-240 240-56-56 183-184Zm264 0L464-664l56-56 240 240-240 240-56-56 183-184Z"/></svg>
             </a>
             {% else %}
@@ -164,6 +165,7 @@
         <table style="grid-area: todos-table;">
             <thead>
                 <colgroup>
+                {% if table_content == 'tasks' %}
                     <col style="width: fit-content;">
                     <col style="width: 10%;">
                     <col style="width: 45ch;">
@@ -172,6 +174,19 @@
                     <col style="width: 10%;">
                     <col style="width: fit-content;">
                     <col style="width: fit-content;">
+                {% elif table_content == 'subtasks' %}
+                    <col style="width: 45ch;">
+                    <col style="width: fit-content;">
+                    <col style="width: auto">
+                    <col style="width: auto;">
+                    <col style="width: fit-content;">
+                    <col style="width: fit-content;">
+                {% elif table_content == 'notes' %}
+                    <col style="width: 45ch;">
+                    <col style="width: auto">
+                    <col style="width: fit-content;">
+                    <col style="width: fit-content;">
+                {% endif %}
                 </colgroup>
                 <tr>
                 {% if table_content == 'tasks' %}
@@ -183,19 +198,23 @@
                     <th>Category</th>
                     <th>Priority</th>
                     <th colspan="2">Tools</th>
-                {% else %}
+                {% elif table_content == 'subtasks' %}
                     <th>Parent Task</th>
                     <th></th>
                     <th>Title</th>
                     <th>Status</th>
                     <th colspan="2">Tools</th>
+                {% elif table_content == 'notes' %}
+                    <th>Parent Task</th>
+                    <th>Note Content</th>
+                    <th colspan="2">Tools</th>
                 {% endif %}
                 </tr>
             </thead>
             <tbody>
-                {% for task in tasks %}
-
                 {% if table_content == 'tasks' %}
+
+                {% for task in content %}
                 <tr>
                     {% if task.status == 'Completed' %}
                     <td id="checkbox-column"><input id="taskComplete" type="checkbox" checked></td>
@@ -211,12 +230,13 @@
                     <td><a href="">Edit</a></td>
                     <td><a href="">Delete</a></td>
                 </tr>
+                {% endfor %}
 
-                {% else %}
+                {% elif table_content == 'subtasks' %}
 
-                {% for subtask in task.subtasks.all %}
+                {% for subtask in content %}
                 <tr>
-                    <td colspan="{{ task.subtask.count }}">{{ task.title }}</td>
+                    <td>{{ subtask.parent_task.title }}</td>
                     {% if subtask.status == 'Completed' %}
                     <td id="checkbox-column"><input id="taskComplete" type="checkbox" checked></td>
                     {% else %}
@@ -229,8 +249,18 @@
                 </tr>
                 {% endfor %}
 
-                {% endif %}
+                {% elif table_content == 'notes' %}
+
+                {% for note in content %}
+                <tr>
+                    <td>{{ note.task.title }}</td>
+                    <td>{{ note.content }}</td>
+                    <td><a href="">Edit</a></td>
+                    <td><a href="">Delete</a></td>
+                </tr>
                 {% endfor %}
+
+                {% endif %}
             </tbody>
         </table>
     </div>

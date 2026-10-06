@@ -21,10 +21,12 @@ def Home(request):
     categories = Category.objects.all()
     priorities = Priority.objects.all()
     tasks = Task.objects.all()
-    subtasks = 
+    subtasks = SubTask.objects.all()
+    notes = Note.objects.all()
     
     if status_filter:
         tasks = tasks.filter(status__in=status_filter)
+        subtasks = subtasks.filter(status__in=status_filter)
         
     if category_filter:
         tasks = tasks.filter(category__name__in=category_filter)
@@ -39,13 +41,26 @@ def Home(request):
         
     if search_query:
         tasks = tasks.filter(title__contains=search_query)
+        subtasks = subtasks.filter(parent_task__title__contains=search_query)
+        subtasks = subtasks.filter(title__contains=search_query)
+        notes = notes.filter(task__title__contains=search_query)
     
-    paginator = Paginator(tasks, 10) 
-    page = request.GET.get('page')
-    paginated_tasks = paginator.get_page(page)
+    if table_content == 'tasks':
+        paginator = Paginator(tasks, 10) 
+        page = request.GET.get('page')
+        paginated_content = paginator.get_page(page)
+    elif table_content == 'subtasks':
+        paginator = Paginator(subtasks, 10) 
+        page = request.GET.get('page')
+        paginated_content = paginator.get_page(page)
+    elif table_content == 'notes':
+        paginator = Paginator(notes, 10) 
+        page = request.GET.get('page')
+        paginated_content = paginator.get_page(page)
+        
     
     return render(request, 'home.html', {
-        'tasks': paginated_tasks, 
+        'content': paginated_content, 
         'categories': categories,
         'priorities': priorities,
         'query_params': query_param.urlencode(),
