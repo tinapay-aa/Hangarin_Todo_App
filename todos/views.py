@@ -5,8 +5,10 @@ from .forms import TaskForm, SubtaskForm, NotesForm
 from django.core.paginator import Paginator
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+@login_required
 def Home(request):
     search_query = request.GET.get("search-query", "")
     date_sort = request.GET.get("date-sort", "asc")

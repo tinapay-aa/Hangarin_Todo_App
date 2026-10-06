@@ -1,0 +1,38 @@
+{% extends "allauth/layouts/entrance.html" %}
+
+{% load allauth %}
+{% load static %}
+
+{% block content %}
+<div class="inner-container">
+
+    <span class="header">
+        <h1>Confirm Sign In</h1>
+        {% if provider.name == 'Google' %}
+        <img src="{% static 'logos/google.png' %}" alt="">
+        {% else %}
+        <img src="{% static 'logos/github.png' %}" alt="">
+        {% endif %}
+    </span>
+
+    <p>
+        You are about to sign in using your
+        <strong>{{ provider.name }}</strong> account.
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-lower-section">
+            <button id="submit-button" type="submit">
+                Continue with {{ provider.name }}
+            </button>
+
+            <a id="cancel-button" href="{% url 'account_login' %}">
+                Cancel
+            </a>
+        </div>
+    </form>
+
+</div>
+{% endblock %}

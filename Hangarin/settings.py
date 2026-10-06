@@ -166,6 +166,6 @@ ACCOUNT_SIGNUP_FIELDS = [
 ]
 
 if "pythonanywhere" in socket.gethostname():
-    SITE_ID = 0
+    SITE_ID = 3
 else:
-    SITE_ID = 1
+    SITE_ID = 2

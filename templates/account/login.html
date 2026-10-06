@@ -2,6 +2,7 @@
 
 {% load allauth %}
 {% load static %}
+{% load socialaccount %}
 
 {% block content %}
     <div class="inner-container">
@@ -39,7 +40,7 @@
         </a>
 
         <div class="social-login">
-            <a id="google" href="">
+            <a id="google" href="{% provider_login_url 'google' %}">
                 <img src="{% static 'logos/google.png' %}" alt="">
             </a>
             <a id="github" href="">
