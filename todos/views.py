@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse   
 from .models import Task, Category, Priority, SubTask, Note
-from .forms import TaskForm
+from .forms import TaskForm, SubtaskForm, NotesForm
 from django.core.paginator import Paginator
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -80,4 +80,38 @@ class TaskUpdateView(UpdateView):
 class TaskDeleteView(DeleteView):
     model = Task
     template_name = 'Task/delete_task.html'
+    success_url = reverse_lazy('Home_Page')
+    
+class SubtaskCreateView(CreateView):
+    model = SubTask
+    form_class = SubtaskForm
+    template_name = 'Subtask/create_subtask.html'
+    success_url = reverse_lazy('Home_Page')
+
+class SubtaskUpdateView(UpdateView):
+    model = SubTask
+    form_class = SubtaskForm
+    template_name = 'Subtask/update_subtask.html'
+    success_url = reverse_lazy('Home_Page')
+
+class SubtaskDeleteView(DeleteView):
+    model = SubTask
+    template_name = 'Subtask/delete_subtask.html'
+    success_url = reverse_lazy('Home_Page')
+    
+class NoteCreateView(CreateView):
+    model = Note
+    form_class = NotesForm
+    template_name = 'Note/create_note.html'
+    success_url = reverse_lazy('Home_Page')
+
+class NoteUpdateView(UpdateView):
+    model = Note
+    form_class = NotesForm
+    template_name = 'Note/update_note.html'
+    success_url = reverse_lazy('Home_Page')
+
+class NoteDeleteView(DeleteView):
+    model = Note
+    template_name = 'Note/delete_note.html'
     success_url = reverse_lazy('Home_Page')

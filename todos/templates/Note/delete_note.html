@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}Delete Task{% endblock %}
+
+{% block content %}
+<div class="form-container delete">
+    <form action="" method=POST>
+        <span>
+        <h1>
+            Would you like to delete:
+            <span>"{{object}}"?</span>
+        </h1>
+        </span>
+        {% csrf_token %}
+        <span>
+            <button id="delete-button" type="submit">Yes, delete</button>
+            <a id="back-button" href="/">No, go back</a>
+        </span>
+    </form>
+</div>
+{% endblock %}

@@ -239,8 +239,8 @@
                     <td>{{ task.status }}</td>
                     <td>{{ task.category }}</td>
                     <td>{{ task.priority }}</td>
-                    <td><a id="edit-link" href="{% url 'Update_Task' task.pk %}">Edit</a></td>
-                    <td><a id="delete-link" href="{% url 'Delete_Task' task.pk %}">Delete</a></td>
+                    <td><a id="edit-link" href="{% url 'update_task' task.pk %}">Edit</a></td>
+                    <td><a id="delete-link" href="{% url 'delete_task' task.pk %}">Delete</a></td>
                 </tr>
                 {% endfor %}
 
@@ -256,8 +256,8 @@
                     {% endif %}
                     <td>{{ subtask.title }}</td>
                     <td>{{ subtask.status }}</td>
-                    <td><a id="edit-link" href="">Edit</a></td>
-                    <td><a id="delete-link" href="">Delete</a></td>
+                    <td><a id="edit-link" href="{% url 'update_subtask' subtask.pk %}">Edit</a></td>
+                    <td><a id="delete-link" href="{% url 'delete_subtask' subtask.pk %}">Delete</a></td>
                 </tr>
                 {% endfor %}
 
@@ -267,8 +267,8 @@
                 <tr>
                     <td>{{ note.task.title }}</td>
                     <td>{{ note.content }}</td>
-                    <td><a id="edit-link" href="">Edit</a></td>
-                    <td><a id="delete-link" href="">Delete</a></td>
+                    <td><a id="edit-link" href="{% url 'update_note' note.pk %}">Edit</a></td>
+                    <td><a id="delete-link" href="{% url 'delete_note' note.pk %}">Delete</a></td>
                 </tr>
                 {% endfor %}
 

@@ -492,7 +492,7 @@ main {
     /* Create Task View Styling */
 }
 
-main.Task_Form {
+main.Form {
     display: flex;
     .form-container {
         font-family: 'Poppins', sans-serif;
@@ -521,7 +521,7 @@ main.Task_Form {
             font-size: 1em;
         }
 
-        button, a{
+        button, a, #submit-button{
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -543,6 +543,13 @@ main.Task_Form {
         button:hover, a:hover {
             background: rgba(255, 255, 255, .2);
             transform: translateY(2px);
+        }
+
+        #submit-button:hover {
+            background: rgb(0, 171, 102, .2);
+            color: #fefefe;
+            box-shadow: 0 0 10px green;
+            transform: translateY(-2px);
         }
 
         #delete-button:hover {

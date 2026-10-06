@@ -15,8 +15,12 @@ const priority_toggler = document.getElementById('priority-toggler')
 
 const filter_modal = document.getElementById('filter-modal-container')
 
-if (window.location.pathname.startsWith('/task/')) {
-    main.classList.add('Task_Form');
+if (
+    window.location.pathname.startsWith('/task/') ||
+    window.location.pathname.startsWith('/subtask/') ||
+    window.location.pathname.startsWith('/note/')
+) {
+    main.classList.add('Form');
 }
 
 function toggle_filter_modal() {

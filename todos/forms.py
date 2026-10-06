@@ -1,6 +1,6 @@
 from django import forms 
 from django.forms import ModelForm
-from .models import Task
+from .models import Task, SubTask, Note
 
 class TaskForm(ModelForm):
     class Meta:
@@ -17,3 +17,22 @@ class TaskForm(ModelForm):
             'category': forms.Select(attrs={'class': 'form-input'}),
             'priority': forms.Select(attrs={'class': 'form-input'}),
             }
+
+class SubtaskForm(ModelForm):
+    class Meta:
+        model = SubTask
+        fields = ['parent_task', 'title', 'status']
+        widgets = {
+            'parent_task': forms.Select(attrs={'class': 'form-input'}),
+            'title': forms.TextInput(attrs={'class': 'form-input'}),
+            'status': forms.Select(attrs={'class': 'form-input'})
+        }
+
+class NotesForm(ModelForm):
+    class Meta:
+        model = Note
+        fields = ['task', 'content']
+        widgets = {
+            'task': forms.Select(attrs={'class': 'form-input'}),
+            'content': forms.Textarea(attrs={'class': 'form-input'}),
+        }
