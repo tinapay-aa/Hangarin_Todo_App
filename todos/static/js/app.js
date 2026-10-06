@@ -15,9 +15,8 @@ const priority_toggler = document.getElementById('priority-toggler')
 
 const filter_modal = document.getElementById('filter-modal-container')
 
-if (window.location.pathname == '/task/create/') {
-    main.classList.add('createTask');
-    console.log("HUAAH")
+if (window.location.pathname.startsWith('/task/')) {
+    main.classList.add('Task_Form');
 }
 
 function toggle_filter_modal() {

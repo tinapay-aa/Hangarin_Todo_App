@@ -149,6 +149,7 @@ main {
             flex-shrink: 0;
             justify-content: space-between;
             align-items: center;
+            gap: .5em;
 
             min-width: 100px;
             padding: .5em 1em;
@@ -199,6 +200,12 @@ main {
             }
         }
         #content-dropdown-container:hover {
+            button {
+                padding-left: 25px;
+                padding-right: 25px;
+                background: rgba(255, 255, 255, .2); 
+                transform: translateY(2px);
+            }
             #dropdown-content {
                 display: flex;
             }
@@ -208,7 +215,8 @@ main {
             background: rgba(255, 255, 255, .2);
         }
         button:hover, #add-button:hover {
-            min-width: 125px;
+            padding-left: 25px;
+            padding-right: 25px;
             background: rgba(255, 255, 255, .2);
             transform: translateY(2px);
         }
@@ -468,13 +476,23 @@ main {
             #checkbox-column {
                 text-align: center;
             }
+
+            a {
+                text-decoration: none;
+            }
+            #edit-link {
+                color: #fff600;
+            }
+            #delete-link {
+                color: #ff0e0e;
+            }
         }
     }
 
     /* Create Task View Styling */
 }
 
-main.createTask {
+main.Task_Form {
     display: flex;
     .form-container {
         font-family: 'Poppins', sans-serif;
@@ -503,7 +521,7 @@ main.createTask {
             font-size: 1em;
         }
 
-        #submit-button, a{
+        button, a{
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -522,9 +540,22 @@ main.createTask {
             transition: .3s ease;
         }
 
-        #submit-button:hover, a:hover {
+        button:hover, a:hover {
             background: rgba(255, 255, 255, .2);
             transform: translateY(2px);
+        }
+
+        #delete-button:hover {
+            background: rgba(255, 1, 1, 0.2);
+            color: #fefefe;
+            box-shadow: 0 0 10px red;
+            transform: translateY(-2px);
+        }
+
+        #back-button:hover {
+            background: rgba(255, 255, 255, .4);
+            box-shadow: 0 0 10px #fefefe;
+            transform: translateY(-2px);
         }
     }
 }

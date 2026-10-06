@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import Task, Category, Priority, SubTask, Note
 from .forms import TaskForm
 from django.core.paginator import Paginator
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 # Create your views here.
 
@@ -58,7 +58,6 @@ def Home(request):
         page = request.GET.get('page')
         paginated_content = paginator.get_page(page)
         
-    
     return render(request, 'home.html', {
         'content': paginated_content, 
         'categories': categories,
@@ -69,5 +68,16 @@ def Home(request):
 class TaskCreateView(CreateView):
     model = Task
     form_class = TaskForm
-    template_name = 'create_task_view.html'
+    template_name = 'Task/create_task.html'
+    success_url = reverse_lazy('Home_Page')
+
+class TaskUpdateView(UpdateView):
+    model = Task
+    form_class = TaskForm
+    template_name = 'Task/update_task.html'
+    success_url = reverse_lazy('Home_Page')
+    
+class TaskDeleteView(DeleteView):
+    model = Task
+    template_name = 'Task/delete_task.html'
     success_url = reverse_lazy('Home_Page')

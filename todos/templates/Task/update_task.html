@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}Update Task{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <form action="" method=POST>
+        <span>
+        <h1>Update Task</h1>
+        <a href="/">Go back</a>
+        </span>
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <input id="submit-button" type="submit">
+    </form>
+</div>
+{% endblock %}
