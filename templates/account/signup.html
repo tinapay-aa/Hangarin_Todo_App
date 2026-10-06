@@ -1,0 +1,62 @@
+{% extends "allauth/layouts/entrance.html" %}
+
+{% load allauth %}
+{% load static %}
+
+{% block content %}
+<div class="inner-container">
+
+    <h1>Sign Up</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-field">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+            {{ form.username.errors }}
+        </div>
+
+        <div class="form-field">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+            {{ form.email.errors }}
+        </div>
+
+        <div class="form-field">
+            {{ form.password1.label_tag }}
+            {{ form.password1 }}
+            {{ form.password1.errors }}
+        </div>
+
+        <div class="form-field">
+            {{ form.password2.label_tag }}
+            {{ form.password2 }}
+            {{ form.password2.errors }}
+        </div>
+
+        <div class="form-lower-section">
+            <button id="submit-button" type="submit">
+                Create Account
+            </button>
+        </div>
+    </form>
+
+    <div class="lower-section">
+        <a href="{% url 'account_login' %}">
+            Already have an account?
+        </a>
+
+        <div class="social-login">
+            <a id="google" href="">
+                <img src="{% static 'logos/google.png' %}" alt="Google">
+            </a>
+
+            <a id="github" href="">
+                <img src="{% static 'logos/github.png' %}" alt="GitHub">
+            </a>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,169 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-image: url('../img/Gods-Lanterns-large.png');
+    background-size: contain;
+    background-repeat: repeat;
+    background-position: fixed;
+    color:#F8F4E8;
+}
+
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+    width: 100vw;
+    height: 100vh;
+    border: 1px solid red;
+
+    .inner-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        font-size: 1em;
+        padding: 3em;
+        border-radius: .5em;
+
+        width: fit-content;
+        height: fit-content;
+        background: rgba(255, 255, 255, 0);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(20px);
+
+        form {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            align-items: center;
+            gap: 1em;
+
+            width: 100%;
+            height: 100%;
+
+            .form-input {
+                background: rgba(255, 255, 255, .4);
+                border-radius: .5em;
+                padding: .5em;
+
+                font-size: 1em;
+
+            }
+
+            input {
+                font-size: 1em;
+                padding: .5em;
+                border-radius: .5em;
+                background: rgba(255, 255, 255, .4);
+                backdrop-filter: blur(5px);
+                margin-left: 1em;
+            }
+
+        }
+
+        .lower-section {
+            display: flex;
+            flex-direction: column;
+            gap: .5em;
+        }
+
+        button, a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            min-width: 100px;
+            padding: .5em 1em;
+            border: none;
+            border-radius: .5em;
+            font-size: medium;
+            text-decoration: none;
+            color: black;
+
+            background: rgba(255, 255, 255, .4);
+
+            transition: .3s ease;
+        }
+
+        #submit-button {
+
+        }
+
+        a:hover {
+            background: rgba(255, 255, 255, .2);
+            transform: translateY(2px);
+        }
+
+        #submit-button:hover {
+            background: rgb(0, 171, 102, .2);
+            color: #fefefe;
+            box-shadow: 0 0 10px green;
+            transform: translateY(-2px);
+        }
+
+        #delete-button:hover {
+            background: rgba(255, 1, 1, 0.2);
+            color: #fefefe;
+            box-shadow: 0 0 10px red;
+            transform: translateY(-2px);
+        }
+
+        .lower-section a:hover {
+            background: rgba(255, 255, 255, .4);
+            box-shadow: 0 0 10px #fefefe;
+            transform: translateY(-2px);
+        }
+
+        #forgot-pass {
+            text-decoration: none;
+            border: none;
+            background: none;
+            color: #fefefe;
+        }
+        #forgot-pass:hover {
+            text-decoration:underline;
+        }
+
+        .form-lower-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1em;
+            a {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                transition: .3s ease-in;
+            }
+
+            #google:hover {
+                background: #D50F25;
+                box-shadow: 0 0 10px #d50f2670;
+            }
+            #github:hover {
+                background: #24292F;
+                box-shadow: 0 0 10px #24292F;
+            }
+
+            img {
+                width: 1.5em;
+            }
+        }
+    }
+}
+

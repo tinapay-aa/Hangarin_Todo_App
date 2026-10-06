@@ -58,7 +58,7 @@ def Home(request):
         page = request.GET.get('page')
         paginated_content = paginator.get_page(page)
         
-    return render(request, 'home.html', {
+    return render(request, 'todos/home.html', {
         'content': paginated_content, 
         'categories': categories,
         'priorities': priorities,
@@ -68,7 +68,7 @@ def Home(request):
 class TaskCreateView(CreateView):
     model = Task
     form_class = TaskForm
-    template_name = 'Task/create_task.html'
+    template_name = 'todos/Task/create_task.html'
     success_url = reverse_lazy('Home_Page')
     
     def get_success_url(self):
@@ -82,7 +82,7 @@ class TaskCreateView(CreateView):
 class TaskUpdateView(UpdateView):
     model = Task
     form_class = TaskForm
-    template_name = 'Task/update_task.html'
+    template_name = 'todos/Task/update_task.html'
     success_url = reverse_lazy('Home_Page')
     
     def get_success_url(self):
@@ -95,7 +95,7 @@ class TaskUpdateView(UpdateView):
     
 class TaskDeleteView(DeleteView):
     model = Task
-    template_name = 'Task/delete_task.html'
+    template_name = 'todos/Task/delete_task.html'
     success_url = reverse_lazy('Home_Page')
     
     def get_success_url(self):
@@ -109,7 +109,7 @@ class TaskDeleteView(DeleteView):
 class SubtaskCreateView(CreateView):
     model = SubTask
     form_class = SubtaskForm
-    template_name = 'Subtask/create_subtask.html'
+    template_name = 'todos/Subtask/create_subtask.html'
     success_url = reverse_lazy('Home_Page')
     
     def get_success_url(self):
@@ -123,7 +123,7 @@ class SubtaskCreateView(CreateView):
 class SubtaskUpdateView(UpdateView):
     model = SubTask
     form_class = SubtaskForm
-    template_name = 'Subtask/update_subtask.html'
+    template_name = 'todos/Subtask/update_subtask.html'
     success_url = reverse_lazy('Home_Page')
     
     def get_success_url(self):
@@ -136,7 +136,7 @@ class SubtaskUpdateView(UpdateView):
 
 class SubtaskDeleteView(DeleteView):
     model = SubTask
-    template_name = 'Subtask/delete_subtask.html'
+    template_name = 'todos/Subtask/delete_subtask.html'
     success_url = reverse_lazy('Home_Page')
     
     def get_success_url(self):
@@ -150,7 +150,7 @@ class SubtaskDeleteView(DeleteView):
 class NoteCreateView(CreateView):
     model = Note
     form_class = NotesForm
-    template_name = 'Note/create_note.html'
+    template_name = 'todos/Note/create_note.html'
     success_url = reverse_lazy('Home_Page')
     
     def get_success_url(self):
@@ -164,7 +164,7 @@ class NoteCreateView(CreateView):
 class NoteUpdateView(UpdateView):
     model = Note
     form_class = NotesForm
-    template_name = 'Note/update_note.html'
+    template_name = 'todos/Note/update_note.html'
     success_url = reverse_lazy('Home_Page')
     
     def get_success_url(self):
@@ -177,7 +177,7 @@ class NoteUpdateView(UpdateView):
 
 class NoteDeleteView(DeleteView):
     model = Note
-    template_name = 'Note/delete_note.html'
+    template_name = 'todos/Note/delete_note.html'
     success_url = reverse_lazy('Home_Page')
     
     def get_success_url(self):

@@ -1,0 +1,52 @@
+{% extends "allauth/layouts/entrance.html" %}
+
+{% load allauth %}
+{% load static %}
+
+{% block content %}
+    <div class="inner-container">
+
+    <h1>Sign In</h1>
+        <form method="post">
+            {% csrf_token %}
+
+           <div class="form-field">
+            {{ form.login.label_tag }}
+            {{ form.login }}
+            </div>
+
+            <div class="form-field">
+                {{ form.password.label_tag }}
+                {{ form.password }}
+
+            </div> 
+
+            <div class="form-lower-section">
+                <button id="submit-button" type="submit">Sign In</button>
+                <a id="forgot-pass" href="{% url 'account_reset_password' %}">
+                    Forgot your password?
+                </a>
+            </div>
+        </form>
+    
+    <div class="lower-section">
+        <a href="{% url 'account_signup' %}">
+            Create an account
+        </a>
+
+        <a href="{% url 'account_reset_password' %}">
+            Forgot your password?
+        </a>
+
+        <div class="social-login">
+            <a id="google" href="">
+                <img src="{% static 'logos/google.png' %}" alt="">
+            </a>
+            <a id="github" href="">
+                <img src="{% static 'logos/github.png' %}" alt="">
+            </a>
+        </div>
+    </div>
+
+    </div>
+{% endblock %}
