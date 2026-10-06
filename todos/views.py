@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse   
-from .models import Task, Category, Priority 
+from .models import Task, Category, Priority, SubTask, Note
 from .forms import TaskForm
 from django.core.paginator import Paginator
 from django.views.generic import CreateView, UpdateView
@@ -13,10 +13,15 @@ def Home(request):
     status_filter = request.GET.getlist("status")
     category_filter = request.GET.getlist("category")
     priority_filter = request.GET.getlist("priority")
+    table_content = request.GET.get("table-content", "tasks")
+    query_param = request.GET.copy()
+    
+    query_param.pop('page', None)
     
     categories = Category.objects.all()
     priorities = Priority.objects.all()
     tasks = Task.objects.all()
+    subtasks = 
     
     if status_filter:
         tasks = tasks.filter(status__in=status_filter)
@@ -42,7 +47,9 @@ def Home(request):
     return render(request, 'home.html', {
         'tasks': paginated_tasks, 
         'categories': categories,
-        'priorities': priorities})
+        'priorities': priorities,
+        'query_params': query_param.urlencode(),
+        'table_content': table_content})
 
 class TaskCreateView(CreateView):
     model = Task

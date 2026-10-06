@@ -146,6 +146,7 @@ main {
         
         button, #add-button {
             display: flex;
+            flex-shrink: 0;
             justify-content: space-between;
             align-items: center;
 
@@ -156,10 +157,51 @@ main {
             font-size: medium;
             text-decoration: none;
             color: black;
+            text-wrap: nowrap;
 
             background: rgba(255, 255, 255, .4);
 
             transition: .3s ease;
+        }
+
+        #table-content-toggle {
+            width: fit-content;
+        }
+
+        #content-dropdown-container {
+            #dropdown-content {
+                display: none;
+                flex-direction: column;
+                position: fixed;
+
+                margin-top: 1px;
+
+                a {
+                    width: 100%;
+                    padding: .5em 1em;
+                    color: black;
+                    text-decoration: none;
+                    background: rgba(255, 255, 255, .4);
+                }
+                #task-link {
+                    border-top-left-radius: .5em;
+                    border-top-right-radius: .5em;
+                }
+                #subtask-link {
+                    border-bottom-left-radius: .5em;
+                    border-bottom-right-radius: .5em;
+                }
+
+                a:hover {
+                    display: block;
+                    transform: translateY(2px);
+                }
+            }
+        }
+        #content-dropdown-container:hover {
+            #dropdown-content {
+                display: flex;
+            }
         }
 
         #search-form input:hover {
@@ -403,6 +445,7 @@ main {
             border-radius: .5em;
             border-collapse: collapse;
             font-size: .9em;
+            width: 100%;
 
             th {
                 text-align: left;

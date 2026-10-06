@@ -52,7 +52,8 @@ class Task(models.Model):
 class Note(models.Model):
     task = models.ForeignKey(
         Task,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name="notes"
     )
     content = models.CharField(max_length=200)
     
