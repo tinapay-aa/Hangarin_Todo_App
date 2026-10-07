@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 @login_required
@@ -67,7 +68,7 @@ def Home(request):
         'query_params': query_param.urlencode(),
         'table_content': table_content})
 
-class TaskCreateView(CreateView):
+class TaskCreateView(CreateView, LoginRequiredMixin):
     model = Task
     form_class = TaskForm
     template_name = 'todos/Task/create_task.html'
@@ -81,7 +82,7 @@ class TaskCreateView(CreateView):
         else:
             return '/'
 
-class TaskUpdateView(UpdateView):
+class TaskUpdateView(UpdateView, LoginRequiredMixin):
     model = Task
     form_class = TaskForm
     template_name = 'todos/Task/update_task.html'
@@ -95,7 +96,7 @@ class TaskUpdateView(UpdateView):
         else:
             return '/'
     
-class TaskDeleteView(DeleteView):
+class TaskDeleteView(DeleteView, LoginRequiredMixin):
     model = Task
     template_name = 'todos/Task/delete_task.html'
     success_url = reverse_lazy('Home_Page')
@@ -108,7 +109,7 @@ class TaskDeleteView(DeleteView):
         else:
             return '/'
     
-class SubtaskCreateView(CreateView):
+class SubtaskCreateView(CreateView, LoginRequiredMixin):
     model = SubTask
     form_class = SubtaskForm
     template_name = 'todos/Subtask/create_subtask.html'
@@ -122,7 +123,7 @@ class SubtaskCreateView(CreateView):
         else:
             return '/'
 
-class SubtaskUpdateView(UpdateView):
+class SubtaskUpdateView(UpdateView, LoginRequiredMixin):
     model = SubTask
     form_class = SubtaskForm
     template_name = 'todos/Subtask/update_subtask.html'
@@ -136,7 +137,7 @@ class SubtaskUpdateView(UpdateView):
         else:
             return '/'
 
-class SubtaskDeleteView(DeleteView):
+class SubtaskDeleteView(DeleteView, LoginRequiredMixin):
     model = SubTask
     template_name = 'todos/Subtask/delete_subtask.html'
     success_url = reverse_lazy('Home_Page')
@@ -149,7 +150,7 @@ class SubtaskDeleteView(DeleteView):
         else:
             return '/'
     
-class NoteCreateView(CreateView):
+class NoteCreateView(CreateView, LoginRequiredMixin):
     model = Note
     form_class = NotesForm
     template_name = 'todos/Note/create_note.html'
@@ -163,7 +164,7 @@ class NoteCreateView(CreateView):
         else:
             return '/'
 
-class NoteUpdateView(UpdateView):
+class NoteUpdateView(UpdateView, LoginRequiredMixin):
     model = Note
     form_class = NotesForm
     template_name = 'todos/Note/update_note.html'
@@ -177,7 +178,7 @@ class NoteUpdateView(UpdateView):
         else:
             return '/'
 
-class NoteDeleteView(DeleteView):
+class NoteDeleteView(DeleteView, LoginRequiredMixin):
     model = Note
     template_name = 'todos/Note/delete_note.html'
     success_url = reverse_lazy('Home_Page')
