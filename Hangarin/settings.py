@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
 import socket
+import os
 
 from pathlib import Path
 
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.github',
+    'pwa',
 ]
 
 MIDDLEWARE = [
@@ -169,3 +171,23 @@ if "pythonanywhere" in socket.gethostname():
     SITE_ID = 3
 else:
     SITE_ID = 2
+    
+PWA_APP_NAME = 'Hangarin'
+PWA_APP_DESCRIPTION = "A Progressive Web App version of hangarin"
+PWA_APP_THEME_COLOR = '#0A0A0A'
+PWA_APP_BACKGROUND_COLOR = '#FFFFFF'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_SCOPE = '/'
+PWA_APP_ORIENTATION = 'portrait'
+PWA_APP_START_URL = '/'
+PWA_APP_STATUS_BAR_COLOR = 'default'
+
+PWA_APP_ICONS = [
+    {
+        'src': '/static/img/app_logo.png',
+        'sizes': '512x512'
+    }
+]
+
+PWA_APP_DIR = 'ltr'
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'todos', 'static', 'js', 'serviceworker.js')
