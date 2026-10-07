@@ -109,6 +109,10 @@ nav {
         }
     }
 }
+nav.close {
+    width: 60px;
+    padding: 5px;
+}
 
 main {
     display: grid;

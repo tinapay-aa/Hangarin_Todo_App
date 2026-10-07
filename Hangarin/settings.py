@@ -189,5 +189,11 @@ PWA_APP_ICONS = [
     }
 ]
 
+PWA_APP = [{
+    'src':'/static/img/ss.png',
+    'sizes': '479x844',
+    'type':'png'
+}]
+
 PWA_APP_DIR = 'ltr'
 PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'todos', 'static', 'js', 'serviceworker.js')

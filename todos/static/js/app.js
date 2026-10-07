@@ -15,6 +15,8 @@ const priority_toggler = document.getElementById('priority-toggler')
 
 const filter_modal = document.getElementById('filter-modal-container')
 
+const sidebar = document.getElementById('sidebar')
+
 if (
     window.location.pathname.startsWith('/task/') ||
     window.location.pathname.startsWith('/subtask/') ||
@@ -46,4 +48,8 @@ function toggle_checkboxes(toggler, checkboxes) {
 
 function toggle_checkbox_toggler(toggler, checkboxes) {
     toggler.checked = [...checkboxes].every(checkbox => checkbox.checked)
+}
+
+function toggleSidebar() {
+    sidebar.classList.toggle('close')
 }
