@@ -192,7 +192,7 @@ PWA_APP_ICONS = [
 PWA_APP = [{
     'src':'/static/img/ss.png',
     'sizes': '479x844',
-    'type':'png'
+    'type':'image/png'
 }]
 
 PWA_APP_DIR = 'ltr'
